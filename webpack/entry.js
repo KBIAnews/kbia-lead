@@ -3,6 +3,13 @@
 
 var $ = require("jquery");
 
+var StateMap = require("./statemap");
+
 $(document).ready(function(){
-	console.log(window.location.pathname)
+
+	$(".titlecard").css("height", $(window).height() - 50);
+
+	StateMap.makeMap($(".map"));
+
+	console.log(window.location.pathname);
 });

@@ -30,3 +30,5 @@ gems:
 exclude:
   - Gemfile
   - Gemfile.lock
+destination: public
+source: src

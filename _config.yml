@@ -33,3 +33,5 @@ exclude:
   - node_modules
 destination: public
 source: src
+
+permalink: pretty

@@ -5088,3 +5088,45 @@ div.page-content {
 .titlecard .titlecard-left h1, .titlecard .titlecard-left .author {
   padding-top: 1rem;
   font-size: 6.5rem; }
+
+.titlecard-lead-toc {
+  background-color: #fefefe; }
+  .titlecard-lead-toc .video-bg-mech {
+    z-index: -100;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 0;
+    bottom: 0; }
+    .titlecard-lead-toc .video-bg-mech #video {
+      position: absolute;
+      z-index: -100;
+      top: 0;
+      left: 0;
+      min-width: 100% !important;
+      max-height: 100% !important;
+      object-fit: cover;
+      overflow: hidden; }
+    .titlecard-lead-toc .video-bg-mech .toc {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      color: #F0EAD6 !important; }
+      .titlecard-lead-toc .video-bg-mech .toc a {
+        color: #F0EAD6 !important; }
+
+.toc {
+  text-align: left;
+  margin-left: 50px; }
+  .toc h1, .toc .titlecard .author, .titlecard .toc .author {
+    font-size: 4rem;
+    text-align: left;
+    margin-left: 50px;
+    padding-top: 4rem;
+    margin-bottom: 2rem; }
+  .toc .toc-post {
+    margin-left: 50px; }
+    .toc .toc-post h2 {
+      font-family: "Lato", "Helvetica Neue", Arial, sans-serif; }

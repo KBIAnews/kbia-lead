@@ -14,3 +14,29 @@ layout: default
 		<div class="map" style="height:100%; width:100%;"></div>
 	</div>
 </div>
+
+<div class="titlecard titlecard-lead-toc">
+	<div class="toc">
+		<h1>Recent Posts</h1>
+		{% for post in site.posts %}
+			<div class="toc-post">
+				<a href="{{post.url | relative_url}}"><h2>{{post.title}}</h2></a>
+			</div>
+		{% endfor %}
+		</div>
+
+	<!-- This was experimenting with background video. Some day, it may come back. -->
+	<!-- <div class="video-bg-mech">
+		<video preload="preload" id="video" autoplay="autoplay" loop="loop">
+			<source src="/assets/bg-vid/title-bg.mp4" type="video/mp4"></source>
+		</video>
+		<div class="toc">
+		<h1>Recent Posts</h1>
+		{% for post in site.posts %}
+			<div class="toc-post">
+				<a href="{{post.url | relative_url}}"><h2>{{post.title}}</h2></a>
+			</div>
+		{% endfor %}
+		</div>
+	</div> -->
+</div>

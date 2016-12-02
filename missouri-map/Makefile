@@ -62,3 +62,8 @@ msdis_mo_dem_60m.e00.gz:
 	#
 	#       Documentation page: http://msdis.missouri.edu/data/dem/
 	curl -o msdis_mo_dem_60m.e00.gz 'ftp://msdis.missouri.edu/pub/state/st_dem.e00.gz'
+
+
+# Cleanup
+clean:
+	ls | grep -v Makefile | xargs rm

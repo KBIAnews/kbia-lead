@@ -9,6 +9,7 @@ var host;
 var svgSize;
 var topo;
 var geo;
+var contour;
 var stGeo;
 
 // Module D3 Items
@@ -33,31 +34,46 @@ function makeSVG(){
 function drawMap(){
 	let q = d3.queue();
 
-	q.defer(d3.json, "/assets/data/topo_counties.json");
+	q.defer(d3.json, "/assets/data/topo-mo-state.json");
+	q.defer(d3.json, "/assets/data/no-projection.json");
 
-	q.await((error, d) => {
-		console.log(topojson);
-
-		topo = d.topo;
+	q.await((error, moStateLinesTopoJ, moContour) => {
 
 		path = d3.geoPath();
 		path.projection(d3.geoAlbersUsa());
 
 
-		geo = topojson.feature(topo, topo.objects.mo_county_slice);
+
+		geo = topojson.feature(moStateLinesTopoJ, moStateLinesTopoJ.objects.states);
+
 
 		path.projection().fitSize([svgSize, svgSize], geo);
 
 		svg.append('g')
-		.attr('class', 'counties')
+		.attr('class', 'state-geo')
 		.selectAll('path')
 		.data(geo.features)
 		.enter()
 		.append("path")
 		.attr("d", path)
 		.style("fill", "#fefefe")
-		.style("stroke", "#373a3c")
-		.style("stroke-width", "1px");
+		.style("stroke", "#ccc")
+		.style("stroke-width", "2px");
+
+
+		contour = topojson.feature(moContour, moContour.objects['no-projection']);
+
+
+		svg.append('g')
+		.attr('class', 'contours')
+		.selectAll('path')
+		.data(contour.features)
+		.enter()
+		.append("path")
+		.attr("d", path)
+		.style("fill", "none")
+		.style("stroke", "#ccc");
+
 	});
 
 	

@@ -8,9 +8,54 @@
 # you MUST touch each one in the routine after unzipping.
 #
 
-# Test Notifier
-test-notify.txt: slice0000.tif slice0050.tif slice0100.tif slice0200.tif slice0300.tif slice0400.tif slice0500.tif slice0600.tif slice0700.tif slice0800.tif slice0900.tif slice1000.tif slice1300.tif
-	touch test-notify.txt
+
+# Merge all the individual shapefiles.
+#     Now we have 13 individual shapefiles,
+#     but what we really want is just one with everything.
+#     Let's make that file.
+slices.shp: slice0100.shp slice0200.shp slice0300.shp slice0400.shp slice0500.shp slice0600.shp slice0700.shp slice0800.shp slice0900.shp slice1000.shp slice1300.shp
+	ogr2ogr slices.shp slice0100.shp
+	ogr2ogr -update -append slices.shp slices0200.shp
+	ogr2ogr -update -append slices.shp slices0300.shp
+	ogr2ogr -update -append slices.shp slices0400.shp
+	ogr2ogr -update -append slices.shp slices0500.shp
+	ogr2ogr -update -append slices.shp slices0600.shp
+	ogr2ogr -update -append slices.shp slices0700.shp
+	ogr2ogr -update -append slices.shp slices0800.shp
+	ogr2ogr -update -append slices.shp slices0900.shp
+	ogr2ogr -update -append slices.shp slices1000.shp
+	ogr2ogr -update -append slices.shp slices1100.shp
+	ogr2ogr -update -append slices.shp slices1200.shp
+	ogr2ogr -update -append slices.shp slices1300.shp
+
+# Vectorize/Polygonize all those neat slices.
+#     Now we have distinct raster layers of each altitude.
+#     At that altitude or above, their value is the latitude.
+#     Below that, their value is null. Let's use that to our advantage
+#     when we create these polygons.
+slice0100.shp: slice0100.tif
+	gdal_polygonize.py slice0100.tif -f "ESRI Shapefile" slice0100.shp slice_0100 elev
+slice0200.shp: slice0200.tif
+	gdal_polygonize.py slice0200.tif -f "ESRI Shapefile" slice0200.shp slice_0200 elev
+slice0300.shp: slice0300.tif
+	gdal_polygonize.py slice0300.tif -f "ESRI Shapefile" slice0300.shp slice_0300 elev
+slice0400.shp: slice0400.tif
+	gdal_polygonize.py slice0400.tif -f "ESRI Shapefile" slice0400.shp slice_0400 elev
+slice0500.shp: slice0500.tif
+	gdal_polygonize.py slice0500.tif -f "ESRI Shapefile" slice0500.shp slice_0500 elev
+slice0600.shp: slice0600.tif
+	gdal_polygonize.py slice0600.tif -f "ESRI Shapefile" slice0600.shp slice_0600 elev
+slice0700.shp: slice0700.tif
+	gdal_polygonize.py slice0700.tif -f "ESRI Shapefile" slice0700.shp slice_0700 elev
+slice0800.shp: slice0800.tif
+	gdal_polygonize.py slice0800.tif -f "ESRI Shapefile" slice0800.shp slice_0800 elev
+slice0900.shp: slice0900.tif
+	gdal_polygonize.py slice0900.tif -f "ESRI Shapefile" slice0900.shp slice_0900 elev
+slice1000.shp: slice1000.tif
+	gdal_polygonize.py slice1000.tif -f "ESRI Shapefile" slice1000.shp slice_1000 elev
+slice1300.shp: slice1300.tif
+	gdal_polygonize.py slice1300.tif -f "ESRI Shapefile" slice1300.shp slice_1300 elev
+
 
 # Raster slicing
 #     At this point, we have one large .e00 image of the landscape.
@@ -19,10 +64,6 @@ test-notify.txt: slice0000.tif slice0050.tif slice0100.tif slice0200.tif slice03
 #
 #     This will look like a lot of repetition, and that's because it is.
 #     We want to calculate and make each of these independently for maximum control.
-slice0000.tif: msdis_mo_dem_60m.e00
-	gdal_calc.py -A msdis_mo_dem_60m.e00 --outfile=slice0000.tif --calc="1*(A>0)" --NoDataValue=0
-slice0050.tif: msdis_mo_dem_60m.e00
-	gdal_calc.py -A msdis_mo_dem_60m.e00 --outfile=slice0050.tif --calc="50*(A>50)" --NoDataValue=0
 slice0100.tif: msdis_mo_dem_60m.e00
 	gdal_calc.py -A msdis_mo_dem_60m.e00 --outfile=slice0100.tif --calc="100*(A>100)" --NoDataValue=0
 slice0200.tif: msdis_mo_dem_60m.e00

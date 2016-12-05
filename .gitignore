@@ -4,3 +4,10 @@ public
 .jekyll-metadata
 node_modules
 src/assets/js/bundle.js
+missouri-map/*.e00
+missouri-map/*.gz
+missouri-map/*.dbf
+missouri-map/*.shp
+missouri-map/*.tif
+missouri-map/*.shx
+missouri-map/*.prj

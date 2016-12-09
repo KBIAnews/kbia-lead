@@ -4,6 +4,7 @@
 import $ from 'webpack-zepto';
 
 import React from 'React';
+import ReactDOM from 'react-dom';
 
 
 var StateMap = require("./statemap");

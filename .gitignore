@@ -11,3 +11,4 @@ missouri-map/*.shp
 missouri-map/*.tif
 missouri-map/*.shx
 missouri-map/*.prj
+.idea

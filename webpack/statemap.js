@@ -35,7 +35,7 @@ function drawMap(){
 	let q = d3.queue();
 
 	q.defer(d3.json, "/assets/data/topo-mo-state.json");
-	q.defer(d3.json, "/assets/data/no-projection.json");
+	// q.defer(d3.json, "/assets/data/no-projection.json");
 
 	q.await((error, moStateLinesTopoJ, moContour) => {
 
@@ -60,19 +60,19 @@ function drawMap(){
 		.style("stroke", "#ccc")
 		.style("stroke-width", "2px");
 
-
-		contour = topojson.feature(moContour, moContour.objects['no-projection']);
-
-
-		svg.append('g')
-		.attr('class', 'contours')
-		.selectAll('path')
-		.data(contour.features)
-		.enter()
-		.append("path")
-		.attr("d", path)
-		.style("fill", "none")
-		.style("stroke", "#ccc");
+        //
+		// contour = topojson.feature(moContour, moContour.objects['no-projection']);
+        //
+        //
+		// svg.append('g')
+		// .attr('class', 'contours')
+		// .selectAll('path')
+		// .data(contour.features)
+		// .enter()
+		// .append("path")
+		// .attr("d", path)
+		// .style("fill", "none")
+		// .style("stroke", "#ccc");
 
 	});
 

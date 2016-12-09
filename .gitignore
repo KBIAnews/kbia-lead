@@ -12,3 +12,4 @@ missouri-map/*.tif
 missouri-map/*.shx
 missouri-map/*.prj
 .idea
+public/feed.xml
